@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rene Linares — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-bg: #fafaf9;
+  --color-text: #1a1a1a;
+  --color-text-secondary: rgba(26, 26, 26, 0.5);
+  --color-text-tertiary: rgba(26, 26, 26, 0.3);
+  --color-border: rgba(26, 26, 26, 0.08);
+  --color-surface: #f5f4f2;
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Space Grotesk', system-ui, sans-serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+::selection {
+  background: #1a1a1a;
+  color: #fafaf9;
+}
+
+html {
+  scroll-behavior: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ——— NAV ——— */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 24px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: normal;
+  background: linear-gradient(to bottom, var(--color-bg) 60%, transparent);
+  pointer-events: none;
+}
+
+.nav > * {
+  pointer-events: auto;
+}
+
+.nav-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color 0.4s var(--ease-out-expo);
+}
+
+.nav-links a:hover {
+  color: var(--color-text);
+}
+
+/* ——— HERO ——— */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 40px;
+  position: relative;
+}
+
+.hero-inner {
+  max-width: 1200px;
+}
+
+.hero-greeting {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s var(--ease-out-expo) 0.2s forwards;
+}
+
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 12vw, 180px);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 1s var(--ease-out-expo) 0.4s forwards;
+}
+
+.hero-name em {
+  font-style: italic;
+}
+
+.hero-desc {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  max-width: 440px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s var(--ease-out-expo) 0.7s forwards;
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  animation: fadeUp 0.8s var(--ease-out-expo) 1s forwards;
+}
+
+.hero-scroll-hint span {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+}
+
+.scroll-line {
+  width: 48px;
+  height: 1px;
+  background: var(--color-text-tertiary);
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--color-text);
+  animation: scrollLine 2s var(--ease-in-out-expo) infinite;
+}
+
+@keyframes scrollLine {
+  0% { left: -100%; }
+  50% { left: 0; }
+  100% { left: 100%; }
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ——— CATEGORY SECTIONS ——— */
+.category {
+  padding: 80px 0 0;
+  position: relative;
+}
+
+.category-header {
+  padding: 0 40px;
+  margin-bottom: 48px;
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+}
+
+.category-number {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--color-text-tertiary);
+}
+
+.category-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.category-count {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--color-text-tertiary);
+  margin-left: auto;
+}
+
+/* ——— HORIZONTAL GALLERY ——— */
+.gallery-track {
+  display: flex;
+  gap: 16px;
+  padding: 0 40px 24px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x proximity;
+}
+
+.gallery-track::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-track.dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
+.gallery-track img {
+  flex: 0 0 auto;
+  max-height: 70vh;
+  max-width: 90vw;
+  width: auto;
+  height: auto;
+  min-width: 200px;
+  object-fit: contain;
+  border-radius: 2px;
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  transition: opacity 0.8s var(--ease-out-expo),
+              transform 0.8s var(--ease-out-expo),
+              filter 0.6s var(--ease-out-expo);
+  scroll-snap-align: start;
+  user-select: none;
+  -webkit-user-drag: none;
+  cursor: pointer;
+}
+
+.gallery-track img.loaded {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.gallery-track img:hover {
+  transform: translateY(-4px) scale(1.005);
+  filter: brightness(1.02);
+}
+
+/* ——— SCROLL INDICATOR ——— */
+.scroll-indicator {
+  padding: 0 40px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.scroll-progress-track {
+  flex: 1;
+  max-width: 200px;
+  height: 1px;
+  background: var(--color-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--color-text);
+  transition: width 0.15s var(--ease-out-quart);
+}
+
+.scroll-indicator-label {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+}
+
+/* ——— DIVIDER ——— */
+.divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: 80px 40px 0;
+}
+
+/* ——— FOOTER ——— */
+.footer {
+  padding: 80px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 1px solid var(--color-border);
+  margin-top: 80px;
+}
+
+.footer-name {
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: -0.01em;
+}
+
+.footer-contact {
+  text-align: right;
+}
+
+.footer-contact a {
+  display: block;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  margin-bottom: 4px;
+  transition: color 0.4s var(--ease-out-expo);
+}
+
+.footer-contact a:hover {
+  color: var(--color-text);
+}
+
+.footer-year {
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  margin-top: 16px;
+}
+
+/* ——— INTERSECTION OBSERVER ANIMATIONS ——— */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s var(--ease-out-expo),
+              transform 0.8s var(--ease-out-expo);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ——— RESPONSIVE ——— */
+@media (max-width: 768px) {
+  .nav {
+    padding: 16px 20px;
+  }
+
+  .nav-links {
+    gap: 16px;
+  }
+
+  .hero {
+    padding: 0 20px;
+  }
+
+  .hero-name {
+    font-size: clamp(48px, 14vw, 96px);
+  }
+
+  .category-header {
+    padding: 0 20px;
+    flex-wrap: wrap;
+  }
+
+  .gallery-track {
+    padding: 0 20px 20px;
+    gap: 10px;
+  }
+
+  .gallery-track img {
+    max-height: 55vh;
+  }
+
+  .scroll-indicator {
+    padding: 0 20px;
+  }
+
+  .divider {
+    margin: 60px 20px 0;
+  }
+
+  .footer {
+    padding: 60px 20px;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .footer-contact {
+    text-align: left;
+  }
+
+  .hero-scroll-hint {
+    left: 20px;
+    bottom: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-track img {
+    max-height: 45vh;
+  }
+
+  .category-count {
+    display: none;
+  }
+}
+
+/* ——— LOADING ——— */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s var(--ease-out-expo),
+              visibility 0.6s;
+}
+
+.page-loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-text {
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  opacity: 0;
+  animation: loaderPulse 1.2s var(--ease-in-out-expo) infinite;
+}
+
+@keyframes loaderPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* ——— LIGHTBOX ——— */
+.lightbox-overlay{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  background:rgba(0,0,0,0.92);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  visibility:hidden;
+  transition:opacity 0.3s ease, visibility 0.3s ease;
+}
+.lightbox-overlay.active{
+  opacity:1;
+  visibility:visible;
+}
+.lightbox-overlay img{
+  max-width:90vw;
+  max-height:90vh;
+  object-fit:contain;
+  border-radius:0;
+  transform:scale(0.95);
+  transition:transform 0.3s ease;
+}
+.lightbox-overlay.active img{
+  transform:scale(1);
+}
+.lightbox-close{
+  position:absolute;
+  top:20px;
+  right:24px;
+  width:40px;
+  height:40px;
+  background:none;
+  border:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.lightbox-close::before,
+.lightbox-close::after{
+  content:'';
+  position:absolute;
+  width:24px;
+  height:2px;
+  background:#fff;
+}
+.lightbox-close::before{transform:rotate(45deg)}
+.lightbox-close::after{transform:rotate(-45deg)}
+.lightbox-arrow{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:48px;
+  height:48px;
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:50%;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:background 0.2s ease;
+}
+.lightbox-arrow:hover{
+  background:rgba(255,255,255,0.2);
+}
+.lightbox-arrow.prev{left:20px}
+.lightbox-arrow.next{right:20px}
+.lightbox-arrow::before{
+  content:'';
+  width:12px;
+  height:12px;
+  border-right:2px solid #fff;
+  border-bottom:2px solid #fff;
+}
+.lightbox-arrow.prev::before{
+  transform:rotate(135deg);
+  margin-left:4px;
+}
+.lightbox-arrow.next::before{
+  transform:rotate(-45deg);
+  margin-right:4px;
+}
+.lightbox-counter{
+  position:absolute;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%);
+  font-family:var(--font-body);
+  font-size:12px;
+  font-weight:400;
+  letter-spacing:0.1em;
+  color:rgba(255,255,255,0.6);
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div class="page-loader" id="pageLoader">
+  <span class="loader-text">Rene Linares</span>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="nav-name">Rene Linares</a>
+  <ul class="nav-links">
+    <li><a href="#poetry">Poetry</a></li>
+    <li><a href="#acrylic">Painting</a></li>
+    <li><a href="#stage">Production</a></li>
+    <li><a href="#costume">Costume</a></li>
+    <li><a href="#shadow">Shadow</a></li>
+    <li><a href="#pinata">Piñatas</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-greeting">Artist &amp; Designer</p>
+    <h1 class="hero-name">Rene<br><em>Linares</em></h1>
+    <p class="hero-desc">Visual artist working across poetry, painting, production design, costume, shadow puppetry, and piñata making. Each discipline informs the other.</p>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- POETRY -->
+<section class="category reveal" id="poetry">
+  <div class="category-header">
+    <span class="category-number">01</span>
+    <h2 class="category-title">Poetry</h2>
+    <span class="category-count">10 works</span>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-progress-track"><div class="scroll-progress-fill" data-gallery="poetry"></div></div>
+    <span class="scroll-indicator-label">Drag to explore</span>
+  </div>
+  <div class="gallery-track" data-gallery="poetry">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMxlfOf4EZlgSNmo4S5ZwHJ2umqPYPt4m1rACO0HC_lJuZjpexhLYsPykmc2faBjo1r_QdfwyQc6yfvg59R12VrTerTMH5is-y9GANEUtPwyoBymjoN=w1920-h1920-s-no" alt="Poetry 1" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMPNSsNKgbM-fhx06WFnkJU70zo20yaZ2iUWP-dEC3wRWOnHMxHMxxU6AdZV8uD1cDtXQe43vgHTiGuEV2YJ3tQKdjSQLlUEJ6rqMWM05DJ13ULrytd=w1920-h1920-s-no" alt="Poetry 2" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMB_qGFW_TwwCwc768Qq3rsIdldC-vyCGgXKGWNq1OOD42VJr0PkAMkpgNTDsOJ4jM9R22Nn3gNSHF0QwCDeH2HPdAsPHPxHRtuucW6TfbSa3hpcFnA=w1920-h1920-s-no" alt="Poetry 3" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczM9wcES9bmrSPcBXduQHPUBUfHxGK9ogyM8EUOU-gVYoLEyYu4YuJ5AN5mqzryKLERlTsTDrfzYv_uuWOsHprOtzE8X458ELjwuEblKYFPphVttJoSa=w1920-h1920-s-no" alt="Poetry 4" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMGzI6Acu87zeNOKy0Ru_5Gk6b0SkhjTjAGle7yK5YJ66Zm7YBa1yZkusDFNEoNbgGT85RKelsK_whg4ZKUScQOClpR1hh_kBRSiYkFGBaR9eREmNAb=w1920-h1920-s-no" alt="Poetry 5" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczOSxUFyLk9f1yslN1YObvX8Z6_nZpvzsTisD9hSSNMR74KLqfBXiVPJhWPviLl8nW8I4X5XgQXMplS9TMop9SY2bgczby0YApLRdPlBnTqvB6CTkY1C=w1920-h1920-s-no" alt="Poetry 6" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczOET08957veiCJO6g1Evlj4zOYGkukTrDI9VNaWD3byp9nC1JisLnREUdFKgycNGv4DBw4z14PvHwRGYe70K7MX2xBErc0At2mWSThJObc4lpobH0Z2=w1920-h1920-s-no" alt="Poetry 7" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczM9fNkiA_-oFiik6g0wNWXKMXZFnJ2MArak82oQzETAO6TTEn_xZf4dikab8czT9iME5H2iFaY_c2nWZTXjpEbNKwKEec04I5Nyf7bZ1NjU4zxv6OL-=w1920-h1920-s-no" alt="Poetry 8" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPfPRbFOCEgZcHdNvJe3Zzhz_gdMM1EIcOJpOzWrtX6trr8HcOrsi_FQxmBjlLA_1VeeGrVaSGTuQtFo-g-98ak6oGt1zhgX6pkfRKVzy2SSYL1DxPQ=w1920-h1920-s-no" alt="Poetry 9" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNzRLiE29cq-sS21VVqwUVxUlyQnAvYVw6sUUXfPL-bnkT3Yp9rFXJZgHqyxvzW97UWvhyi3xKdrWBqkINXajuvlA1e2QyJJfwfI_hKI2hN7Nz8XJSm=w1920-h1920-s-no" alt="Poetry 10" loading="lazy" draggable="false">
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ACRYLIC PAINTING & ILLUSTRATION -->
+<section class="category reveal" id="acrylic">
+  <div class="category-header">
+    <span class="category-number">02</span>
+    <h2 class="category-title">Acrylic Painting &amp; Illustration</h2>
+    <span class="category-count">11 works</span>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-progress-track"><div class="scroll-progress-fill" data-gallery="acrylic"></div></div>
+    <span class="scroll-indicator-label">Drag to explore</span>
+  </div>
+  <div class="gallery-track" data-gallery="acrylic">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNpIo9EHBDDN9VMzJzdGf4kbzhh-4diySfObHUeds4cOsW_VMHryIc66DqLzJiq_Qwx2hk6PV48f7loPG4aXc1AeJWmHe2ugA5u3WQhZ1pboLhjipai=w1920-h1920-s-no" alt="Acrylic 1" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczM2Pqf9_FWy21vlarUbRe3qKOBa0YYfBgl4B23MGGL9s3Mqsxhs_Ta7OYh1dkv0kvpclBRvcd_UdSeuj3rrDlnH9rAiBCSj7Ds97UmUOHNmsKNeV1Dw=w1920-h1920-s-no" alt="Acrylic 2" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMwva-I9zSkGg-G5mDs1uxq_WIRKK1-E1B9hGm2e3rs405Bpckao6fXd5AkTNdhIwTPpjAmcP-8PVEw4h4cuYwaqydrWnaiR1Tnap5tIDtzgFeFTTV4=w1920-h1920-s-no" alt="Acrylic 3" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczON66CZ7kXytMzUb0O2udEoSBQlVlvZI0ZHUa8e1S2AW4Jr5PssMYCXT5bVuquXJ4gCOKbWpwrBxFCnvyOwcYCejcyplIQbu1iBvqhroHKxneQX4cLP=w1920-h1920-s-no" alt="Acrylic 4" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPbU3n0mhJP8i6hFIGIPr__kGoXSoedpUUSCESxipOZ3pmYsYeD8mkr0uvo9-o4NAEcRvURqjVTow-Gx-N9NtJmL8TJYFS8IvGjK6lAEGzZQGLjBSqj=w1920-h1920-s-no" alt="Acrylic 5" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPWcx-t8i5uAFnzy_fIUGbabz0boUa4jGoD2hAYyjOw54_Fli9d2DF2b3Aq_-1gkAh-PaCGzmEuBZwp6o9y4XRzTyz1KhlkqgCuK9Badpv2XeYy_BGB=w1920-h1920-s-no" alt="Acrylic 6" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPI5jm4PJnXMLaaqdNM7ozt4MhY122wyhDB3lsTsR7qMcU0Gr-IBVzne_T_jkKledaZ2WsPpE0q9IajuZj4QDWqr4MENbV6HKYAtVlosOyNVd_x2L_b=w1920-h1920-s-no" alt="Acrylic 7" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPBpIWzHLRjNrGO70nH8KQgsBe_jOOosmNOES7klotGP0GjzlmXqA1KFBJmI_Y3nhbchDsUvS0G1fKQlH5DG3-QRmlb8V_E67l9qU1HF5R0ifsatr60=w1920-h1920-s-no" alt="Acrylic 8" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczOPJVhRngd_CHdwlnGxOY3q-RsdFSixYbgyoV9e8i4LI-ilzfEWzrn7usiy90_OFgVKg2UOCBijQIxHlpaY-o3j8hS6YGMV2LGBJ8SuFEWM6BQxMaln=w1920-h1920-s-no" alt="Acrylic 9" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNmx_CMGv4v7OrVhivJPGV4xTegBnK2ZJx6L7P3lA7HP4UNC2VaqlXXFW0r4EoUoqyxAYNULBs_yvzcfq7zuApx2FhMqoGBhREW_HR70T1ucgo0jdhN=w1920-h1920-s-no" alt="Acrylic 10" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNeX3mUaNV8ax8bcbmhVWgt1W33gBBkN7TOAqJNNNNsgz48cxWEp7XdM8sd8znTwOC4vRb5pJXpa51xdwXFFjB1aesul8krL8qi9F0Pf6DlZYAWdlvl=w1920-h1920-s-no" alt="Acrylic 11" loading="lazy" draggable="false">
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRODUCTION DESIGN -->
+<section class="category reveal" id="stage">
+  <div class="category-header">
+    <span class="category-number">03</span>
+    <h2 class="category-title">Production Design</h2>
+    <span class="category-count">30 works</span>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-progress-track"><div class="scroll-progress-fill" data-gallery="stage"></div></div>
+    <span class="scroll-indicator-label">Drag to explore</span>
+  </div>
+  <div class="gallery-track" data-gallery="stage">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczM-qIEEbr8RWGuB3s1bktB9l001hs-mKHoq5BkHH-LKegXvssarRpmkOxMIHHlkYIcNicVZZqFXdsQrb2zx37WHeQQ1dzwfIQdTf9scOm6S2rz06wHd=w1920-h1920-s-no" alt="Production 1" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMBDBbs9MMnH0gEQRI4Q9TJVwy2xdgUYfrIzCHVkE6cv1CGYsKnZnGQuKyfNEIBxC-UGat5t_Yi__xNu1ezg2yD1Si951-w5n7zHVhflHcYYDZx1VBp=w1920-h1920-s-no" alt="Production 2" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczN_yHhOQbU1ACLGB703buXtPy6Sb6-t4tjEr71fqoTcpBzyzacHRH9JvDCU7DvTZCxgmwJ4jKNwQTy4sAIAgJ53YexXnxQOvJgLgNPOXaeO1XT1qF8g=w1920-h1920-s-no" alt="Production 3" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPu83rJvT-eg3Ke-f9lZWWCrm8oxg0CmftOqvNkLATkJZNUT3OigCHTaXhqQy7kmw8T3WfUxcw-YzlUn1f3HNnyoPgkIQbaGaUdHQwvEcr6k3G7FOoj=w1920-h1920-s-no" alt="Production 4" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMv4z7WCR4Rbob7FXgN7ul8K9XviGYIf6UWZbxQBgcLYoqshu_eIXIRoaWpTjYQl4bV1oBYnj20d-gcb9oJrAcbEA3ZInys3sItdAleQQKRTBhOjD_1=w1920-h1920-s-no" alt="Production 5" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPfeSye4gDh63iIsjwE743Yk6yeLBgUVP_5QKHgdMJuvmK1z82_76oDetBwJSLxQQ1utHlaWSEwu8iFAPd5gvxrzTbsGjsoFYzyeHn4iIyLchtmTq_G=w1920-h1920-s-no" alt="Production 6" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPoVSHcA1N_KADZ8K_ib-JlNO6g-lGvSPQEY8R9utH470lz7EVNI7cS86E8u-GmREb2Lfy0Xk_MiSw-FpN7eEvYOk8pVr34XPRzJTDl0NrTCW0ClmL1=w1920-h1920-s-no" alt="Production 7" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNYmt9wv7lCY_taTVfkklpkrErjYzSL5iV7fvZBhjju4yKCKbwvIHDZHIjJFfsgnnSBNTX_eUrw0mqRp9k26sy3IUsnSEV3a0DMxP5XBGhX84oI_lPk=w1920-h1920-s-no" alt="Production 8" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczP8wf8XAXH3LOtkYzP02LkzeHLcGBSImF6s7wpa1IQTzM1_OOzkFjFAfSIviIy5KbJfl-KX2lScEIwthNyyeUH_hzzF8AFVYf-L0f5uIKQ5wsRab6SG=w1920-h1920-s-no" alt="Production 9" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPrmRE6-ah80YOo7zmV_dh5XQvogPRd5tYIdwiYHMljFswnCOlpWScns7lmlJKLI-WVRBsHTsTEm1E9dVqdVF1wYoNbDfWoyka-sKGbXl6jCuUCDYG9=w1920-h1920-s-no" alt="Production 10" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczOIHESc-ydoJp9LoJclzq_mYPDzTagQ9mBCknCgmn7TofNB_uwXlTH-sM_lT1BsD3m4bLK4lrU7HIlw-SMTqd0MLFMFGpwTw_WxOl9MTXDtEqCOm0zv=w1920-h1920-s-no" alt="Production 11" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNAML0vax1u88n9ZR87ugYP96TpAjU6Ml-6d7AdX8xQvxWEdpGBVSK81aN5oztZwPAkPfaMh2GN6ZeeGHx4yCCXFmSOxvwxEkoWl5QpzMae324_svCq=w1920-h1920-s-no" alt="Production 12" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczM_7ws7I7C3Ks8ph5r-B6sh8xgMtGpEacEzcqCCCuJVs3xJLmQ79XhtTcTALcQ-6ahObFmGQg6I148kfFyLm1WJWKipERnzYmPCj7CR2I7EplE3b1VO=w1920-h1920-s-no" alt="Production 13" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPytB9hjYyWNWgZHJE6bEZ5Q67w8Zt9AjbuvH7bSRrkSbT1yizY5N49XgFR35AWTtnQJkHZZHd9OEd8r9RecosubJ0wJbZ9il5RJ88XV5jBxWGZftek=w1920-h1920-s-no" alt="Production 14" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczOY1ST3A57bui8-JqZo8kyU-X1umi6_nUxGR8-d6SeShdvNqwSSnH1YeAhwQUA0KuiGxiQRqVKVFftihw7zZOhWfCFy90ZLBVg9jWZrISP-BbgDxVi8=w1920-h1920-s-no" alt="Production 15" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPb6hlF8O0mQPQ3t_sowl-ROHPumqoyfojJYFICuX1V7hrrb_ap2fst8wfNheSsjaNxo6Zc1eguY-0RJ42BzafeZLd84MlZ8CpDyecgTWqclDBbKBf4=w1920-h1920-s-no" alt="Production 16" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPzR5Gl2PIAlNGqksoN0gRIKov7K5dj1vInqCpPC9quWIk5Qhauzan4px1M8OgFJitNSS1jYNtyL3lRvnTMXrrZBjem9jMM2Q1zSu2N18714JZMfiZK=w1920-h1920-s-no" alt="Production 17" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczOwxzDMIvBsgTN9oTloBtzXjEIDdR4DgIKF7O9HUhIsfbl1YfTPc8t1Yp9x3397vc0aZQYqZs2aQI2jAEZ447cSr9CJM11eynPlOWi-avLm57bvi8QW=w1920-h1920-s-no" alt="Production 18" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczO1MV5B0TF_srRUSwyhQJsH4ysajRQMjAwP_KeeCpnKKJMo5G8-KFSm7bbgu6oj0wJ35hOFcZQQn7uOOf1Lho05uMVMHwCp8ouvlfYnvZrSL1asMHeN=w1920-h1920-s-no" alt="Production 19" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczOsxPYtKt-CHujGVlxogvMSy8l-LBRbK3TylrCT67r4sapc-FjyKMs0agI_vc4IHT_F9JQLBh8E2Pe6BOxflMTqPrNkYxhaNS8sSDUIBIUMtPNUR1uH=w1920-h1920-s-no" alt="Production 20" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPkTRpgouKV1bpu_K1XLokbMcu8rQ0rqZ9s2qm63dOmLXpcHqCDvASkPkTTJx3PJkbfgooXg0-Ibq-gBVxkkjA9fCAP-qQNW6syQrDRCPeKF7XnxsPY=w1920-h1920-s-no" alt="Production 21" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPdEC59AU85tyCYHLPvHAigF8UIV2okQuUQofnIQ0v83OYusVU5DSGwISed3mSkWi5Vd37Dq7uS_KXTAvudwC9aChdizELEDoBZb2c4U3VfPDKBoop3=w1920-h1920-s-no" alt="Production 22" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPL1aBdRBeUsl0hIc5EcNJvzsGZG1LvSUT32noIo_yYw37J9VdtEG0mmD1hJRgdsS0tPJPvOndo8MyAj2hPQ7w_Pxzy-G_owVC8Fv4me43kMwKa3kUk=w1920-h1920-s-no" alt="Production 23" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPiwdm0CNYocMv7slgN4sSz26j3XyfjLQZAU4yqY-M700DcZ3u52AVlml6bgbWoK1laNWhalKsqVgTsxmsTxpiiys1x75W_GQ8wU2ZG_ArHlTBipPFR=w1920-h1920-s-no" alt="Production 24" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNicS0xrGiAbpqQ9MP_kJM7D0xhHjbCg5-HxUBN1eMdEMHZnoybewF6BzATYLvDpKK7D1BTwGEgF5rH0RtVjA1hbDZyUETTEjimVP67Zpi8AagBiUO0=w1920-h1920-s-no" alt="Production 25" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMU9gSKLdGSrUHRndKcDJJGct2AH9LyRrvY09ciJ1zQ23MCLFopVzLlnWBhus2yx7va3O8PDGn6WyH4zhE3NCknhXznwEwmQwmQlqlxevOS_WEboGoG=w1920-h1920-s-no" alt="Production 26" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMfsuB5bcb-6RDDqcBF2XF9BGMzr7T8b2SIRZwbE8Yuzc-VV4DTGttKajSpFZK91zZXld9-4VlDfLYWuYPbdNrJoDoueu66v7f5BKM52fQwXuOQvb07=w1920-h1920-s-no" alt="Production 27" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczM5dB9mT6_4AdvtvbwZtFofm2-87oQL0abwqJpWIaYUQkO9hIiZgdBXoPMDGYyd6GaeLwsYGp-je4xvkesR91UreKG0uVMjciTS3Pw1Yr-II4FTIMeM=w1920-h1920-s-no" alt="Production 28" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNaBwe38VrBKv7z6JQc9dMjx7Q44erCHj5wwPufqLwxazmY5tDOiDdgdEDSDN1-z1noy83eK7wL0GF6_8JKqoht0rC_bVhZXbc3u0prkv97E-s8_yNH=w1920-h1920-s-no" alt="Production 29" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNNea2ybPX7uQqNuEzndwVSuKJRcqBOCWWHfmHS8-0twIeoYI7gberTt3kffAuS2v7uGs4KTjI4CcBSQaDPzGnqo9_JG_b18qDFFmFsW68ms1S7Mw8m=w1920-h1920-s-no" alt="Production 30" loading="lazy" draggable="false">
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COSTUME DESIGN -->
+<section class="category reveal" id="costume">
+  <div class="category-header">
+    <span class="category-number">04</span>
+    <h2 class="category-title">Costume Design</h2>
+    <span class="category-count">18 works</span>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-progress-track"><div class="scroll-progress-fill" data-gallery="costume"></div></div>
+    <span class="scroll-indicator-label">Drag to explore</span>
+  </div>
+  <div class="gallery-track" data-gallery="costume">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPLUCoKZooi13dfVl-64wIQ7KZPTSktTltYr7_mFTc5aXlG-1IgsV1ASzxj3Gk_niDzSqcCHJ-Spe5-UCC-Vuak2h9UernK9E1UNqoL_m-9q1nVs2M5=w1920-h1920-s-no" alt="Costume 1" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNw3c4e-0ZO-DRmwtbdB_Mxm5FYKhJazfDH9_bitjpCAh-RaPPPpJWbz0ewKAh-PsEt64Qudw_4_beB1L8KBd1LLvdS7XYwqTwodHyikgyKW1CD2c5f=w1920-h1920-s-no" alt="Costume 2" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczN3WSHpnVZScaLoKuu-8axcAw8wPfyhZrDteExeK4loMhl-YwQQ0vnvY-UPt9c93GZxWH6ZeOWR_ZjzJl4SNpub3pzVqweOVNK4aUYuiEH4-j_7Thjf=w1920-h1920-s-no" alt="Costume 3" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPVqCLYOKR_ROFXY1uCEoi3qm2MJXb4E0G02_75hVNpVqkbiKv0ZxRrxgwgO1Tn_uU-fBqONcrWFG3Fetxab-bnsg_wWpBsXLf0BwXjaaZlBkLBYDe7=w1920-h1920-s-no" alt="Costume 4" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczOj7hC_MhuLJgKFLFq5OaNp30nAmHGtrJAC5LMU-w3_Mn0m0MnIMsYBN-wMn7uUUJzwXmmA6DWWzG1h4xK8eu3ZOPCXaKJzsiLCgLcWBkd2oCr4Iiok=w1920-h1920-s-no" alt="Costume 5" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczO37N4gBEUJLbAeSRGtbTomQBBVMSm2atXU6Y0YNhL-8dtvNohJxn8Zv2nU9cwKUc_oX9uTOLy4QwU1D83jJjJITO-WySVJSJGrubVS7j5WbQw_m4M2=w1920-h1920-s-no" alt="Costume 6" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczO9usTH9-RjI2V6Dptx5eEG82cxXUFBvvDTXpaCJVxCi4chBQRv5FO1L-YxWT7ZK-03VA6Jat95FH0mM_8UJ3DtGHaHI1i9dBYffpjTV3sKUKTeBztw=w1920-h1920-s-no" alt="Costume 7" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMA-9Bb-LCYgP6iHg2hSN9rJD9vWq4lziH2xRTWXNSQ9ZKZ5AEP0s8_Yg0PF5amyY2Jn2nwsRnYxU5xjXjsHo-p3k2qzCh_EfS4kYDNWuIdaUI9LViM=w1920-h1920-s-no" alt="Costume 8" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczOL4tUJMZf8EaA3LXt0Nve0A_Foxw-H7EpWs8cHWf_ssFB3wayAGzdrAPByCokmjJjXqBlbbe5EL1tSwKnlkvwAG3RQtXSzlT-oB8_sjgRWoFp-o7Ev=w1920-h1920-s-no" alt="Costume 9" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczO_ieYZlS2mXK-ZE_RulDlXD4Q0sgDJHbf6IxUW6BN4v6sJP0RoTLVieO9KpVDGomojfbyr9kPkpo9FkzZy4jqdLy0F7HAtKWuxUTh6oUSGDsmnwsKK=w1920-h1920-s-no" alt="Costume 10" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczOFTCdRvT2FFu5lfzN2_GcJ7-2l4jKRCUagyRpt8YzfHfWkFOoLVnomfq5rehprVNp-kw9QAXfDowFOvCiYkU5M7UlT99UXe2cIlj6vCzK_Feiq2FLP=w1920-h1920-s-no" alt="Costume 11" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczM6KIGZOeRftt1Mpi6ePGSO94jIrs041RsGFfo4m3v1buvleizPYXsPiF7j_TrWU-5VVnOzGgwOsd3142DitUTA7F6pWsummrpNnU4-BkqBZ246tsUM=w1920-h1920-s-no" alt="Costume 12" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNIbURbomHdAyv8F_7JiYhoyTqhp6cyQniIeZ2bos_ks16qmY4ajhkOIp4StjjUbTqAgc9Y4uvoHoQ9ArMGPjCWJccZHoejj76j3yXMyFZ-F6ta8mrS=w1920-h1920-s-no" alt="Costume 13" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMHHO4fCUFkO_eBqkJr5MeAxWKW2rDqhAK7ZRjm0xjnzi1l6ImlzmEY2JzTeo07o6snYQX3Gn9V5A-t0MBHeCP7CJh8pHEf1hBgCduAwhbS0YagNHoS=w1920-h1920-s-no" alt="Costume 14" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczN3ubws5OB8-5LCH90-RL5uqelMz9gLaMwdV8dl93loBmK-JsWQVjlYEqgKal631IrBCXmASTRGi52aVPj2Ed5jcOSDbxDMka1nBBfvbdfT6G3I4kme=w1920-h1920-s-no" alt="Costume 15" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPp2oKXIk9G8ehKjBZqrO1fLr37Pnj8Tgx6Dj57Fk4K23TzsjQkvhrUULztGtOFUVRZS_qmAjQyW8PAWKB5umg90IHPJUEvOUBUtIOJrT6pFH-rhpXo=w1920-h1920-s-no" alt="Costume 16" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczN2B_-fidUsnBSAh9j3WAfkYRT52j6r10jUz6gg412E5afAkprH0oxheNdTZMGwfewJYob1jHBC5CTZjs5hCe2LPS04hS-GoRSB1rBq0fwdyZMy-BOC=w1920-h1920-s-no" alt="Costume 17" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNw_KdWZqZ4J4ieeW1D41EjQ_CjUOfl_kpj_qeF5lc3FClt3MW1H15oDvJD6mXcPgszAF9ISwYYIhj4ZbxRknnr12IMNoRXrk1Er07ESVk3ocHcXNoT=w1920-h1920-s-no" alt="Costume 18" loading="lazy" draggable="false">
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SHADOW PUPPETRY & STOP MOTION -->
+<section class="category reveal" id="shadow">
+  <div class="category-header">
+    <span class="category-number">05</span>
+    <h2 class="category-title">Shadow Puppetry &amp; Stop Motion</h2>
+    <span class="category-count">22 works</span>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-progress-track"><div class="scroll-progress-fill" data-gallery="shadow"></div></div>
+    <span class="scroll-indicator-label">Drag to explore</span>
+  </div>
+  <div class="gallery-track" data-gallery="shadow">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMxlfOf4EZlgSNmo4S5ZwHJ2umqPYPt4m1rACO0HC_lJuZjpexhLYsPykmc2faBjo1r_QdfwyQc6yfvg59R12VrTerTMH5is-y9GANEUtPwyoBymjoN=w1920-h1920-s-no" alt="Shadow 1" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMPNSsNKgbM-fhx06WFnkJU70zo20yaZ2iUWP-dEC3wRWOnHMxHMxxU6AdZV8uD1cDtXQe43vgHTiGuEV2YJ3tQKdjSQLlUEJ6rqMWM05DJ13ULrytd=w1920-h1920-s-no" alt="Shadow 2" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMB_qGFW_TwwCwc768Qq3rsIdldC-vyCGgXKGWNq1OOD42VJr0PkAMkpgNTDsOJ4jM9R22Nn3gNSHF0QwCDeH2HPdAsPHPxHRtuucW6TfbSa3hpcFnA=w1920-h1920-s-no" alt="Shadow 3" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczM9wcES9bmrSPcBXduQHPUBUfHxGK9ogyM8EUOU-gVYoLEyYu4YuJ5AN5mqzryKLERlTsTDrfzYv_uuWOsHprOtzE8X458ELjwuEblKYFPphVttJoSa=w1920-h1920-s-no" alt="Shadow 4" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMGzI6Acu87zeNOKy0Ru_5Gk6b0SkhjTjAGle7yK5YJ66Zm7YBa1yZkusDFNEoNbgGT85RKelsK_whg4ZKUScQOClpR1hh_kBRSiYkFGBaR9eREmNAb=w1920-h1920-s-no" alt="Shadow 5" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczOSxUFyLk9f1yslN1YObvX8Z6_nZpvzsTisD9hSSNMR74KLqfBXiVPJhWPviLl8nW8I4X5XgQXMplS9TMop9SY2bgczby0YApLRdPlBnTqvB6CTkY1C=w1920-h1920-s-no" alt="Shadow 6" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczOET08957veiCJO6g1Evlj4zOYGkukTrDI9VNaWD3byp9nC1JisLnREUdFKgycNGv4DBw4z14PvHwRGYe70K7MX2xBErc0At2mWSThJObc4lpobH0Z2=w1920-h1920-s-no" alt="Shadow 7" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczM9fNkiA_-oFiik6g0wNWXKMXZFnJ2MArak82oQzETAO6TTEn_xZf4dikab8czT9iME5H2iFaY_c2nWZTXjpEbNKwKEec04I5Nyf7bZ1NjU4zxv6OL-=w1920-h1920-s-no" alt="Shadow 8" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPfPRbFOCEgZcHdNvJe3Zzhz_gdMM1EIcOJpOzWrtX6trr8HcOrsi_FQxmBjlLA_1VeeGrVaSGTuQtFo-g-98ak6oGt1zhgX6pkfRKVzy2SSYL1DxPQ=w1920-h1920-s-no" alt="Shadow 9" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNzRLiE29cq-sS21VVqwUVxUlyQnAvYVw6sUUXfPL-bnkT3Yp9rFXJZgHqyxvzW97UWvhyi3xKdrWBqkINXajuvlA1e2QyJJfwfI_hKI2hN7Nz8XJSm=w1920-h1920-s-no" alt="Shadow 10" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNUxkYVrLWVk-xs4PuXSsNMH4LMag3nPFXdR62hvD4SFmUm2VUxmuGAIgy3ss6xsv3RJQNOcouqjgU8aDvdzRuG3BqGrYn0J3vLWB801YtfS_0xXYmj=w1920-h1920-s-no" alt="Shadow 11" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczOGu7DqeLoo_F7T25q6m1jCdpfKF1OWzN1Zp_t_271XqkHE3XrzvL-PTjZ9aACWw68MCefqBYxbzY2QNzN_xQbhY6vQ7X87RWzpr_macCz1_mB_gshS=w1920-h1920-s-no" alt="Shadow 12" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczO5N9s6Ma8rQMbG-zcSR_twxCrf1ATSAGXFBCZD318qFt7pjjJuzjyVqnRwx-anKj5VHDmkTXDN143ueo9ElRv21muwglV5nEIiGypnXgudKkyUqIhL=w1920-h1920-s-no" alt="Shadow 13" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPPK6NtB4zD-CDN-P7WGMezNtAX0_piECLswOe06IA1jBecQaYKjAu3nzfw033ocTU1gwgfb2qVitANiDESgDhmnmN5bp0TOeRhxG2AA6UfYQeNwJN7=w1920-h1920-s-no" alt="Shadow 14" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNUoFKHwhdLr-MDsN6WKM9q-mEpRm6zAUEfDgMsKtQSP-GtZABVobuwkTvCK2yAGV8de1EEyipH7op8w8J1QOReU5XYUbgNL9_GZFSBxCz253AhoABY=w1920-h1920-s-no" alt="Shadow 15" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPd4hFEvKzRsLcx3WSbET_ycQwl6x6sy2_Z_WZLp6pvL8cpYE3-5c45yOIeOTFSBJeOr8Njd2UkDaA_kPGVvU3jU5NfDR6BmhCWrmV3u2L24THR5fD9=w1920-h1920-s-no" alt="Shadow 16" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMJ0pWvHCYrg7iHNXvRziFIH3reFwuAaSBcgluD6qzAyAQnBuqGK25KZT_iHs-bmaRGfkoYdUB857CRdMALPl6RpDwPwo7IiHogeN1-fIx0STBYJJBz=w1920-h1920-s-no" alt="Shadow 17" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczORGVwuj8ZqSoRkAkDBOCbzOZWwcYVUp58ulkG1x5FM7jdn5Nk1LhGncS4XA_DfGLsq-xmoselTb_QnMbBFAYo-fEYJ0r_qiu7MS48xyOf4lUuBmW-_=w1920-h1920-s-no" alt="Shadow 18" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPklsPfjEXB3WE9ANFw4p3lXDGKOrYlHQqxo8dJE7BCW9Ob1y47_-pRO5SaPU4Ag2gJlOQW3e7l5HlEOa_9gApA-USmPWQ482TxNpHle7-T72Pszbov=w1920-h1920-s-no" alt="Shadow 19" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNjlTe0zHV2Se3E0Nw2m9FUcl7b696ifZcIwFJ51DfvYDqCHhAFngyVw4SOlBclRbjyEIBpim0p5sZ679LiuI_ettDeOVjy-SESzT9g5GH4C4uB-gkB=w1920-h1920-s-no" alt="Shadow 20" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMMXP_ZmPq9BEmUdbmWvd2T2j8-WmL339fSzRauGIUs-3-mWvcT01OdKwo1EHu1ZMKRXWvndrpAZse_uq2A-dGptEEpAKdGstn4DEUpS8oD99ivIa7k=w1920-h1920-s-no" alt="Shadow 21" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczM3o46_wSr6TRP3GJdFuz5Osxl9Ql8sF15F-XNot-J50W_B3EyysS3gceTfritWhQnEyy0nx54bURy8VCk60kMrmLjKCsWc2Uuud3WAegXLIaqLc1N2=w1920-h1920-s-no" alt="Shadow 22" loading="lazy" draggable="false">
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PIÑATAS TOYS & MASKS -->
+<section class="category reveal" id="pinata">
+  <div class="category-header">
+    <span class="category-number">06</span>
+    <h2 class="category-title">Piñatas Toys &amp; Masks</h2>
+    <span class="category-count">11 works</span>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-progress-track"><div class="scroll-progress-fill" data-gallery="pinata"></div></div>
+    <span class="scroll-indicator-label">Drag to explore</span>
+  </div>
+  <div class="gallery-track" data-gallery="pinata">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczOSShJkN0blRI5RolzjQIugHks9GWAhdMqsAvmUD-HQaNllAr8TRf5SYAm0Oci1JtYE_jsXT4HtEJNPh2sZh2YFq3-nSZBsDHWjYV3HRAugclv-5zoG=w1920-h1920-s-no" alt="Piñata 1" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMg3NYdD3YAyMrb26kfxTY3syKWUSikNC3L8jPPXE1kitZ4F9IIiGEgFLyDJlr4kZimq8O1ZNHnwcW6kEiKQr88FgEt_Z7UyDE9ccgBd8FYUwwG1mcH=w1920-h1920-s-no" alt="Piñata 2" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNeR_7TDTQ4OfLyuTt-03Wcug6C_EEwXWdtpl4_6l1sEEgCcKZJA9whVK_8Ln75Ed33-4sZVQHg-34VYFmW2cv34LPygbpfGDr_zyCVoW4PA2WeD8mA=w1920-h1920-s-no" alt="Piñata 3" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczOYaPIYvXFzUh7ZXF9pSRscQVLER2qoEV7vbS_DjdVQcErX9yPXga0loBJhtm0ADQoNcThv78rEk5X8mhW37z82FgZIXi5g_u0gYZkGwxURq9MtbhEd=w1920-h1920-s-no" alt="Piñata 4" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNhBuSZ2SSMXvM-yVpV_xUYPjFKJk5YjqwOzbKVhi9lagR4yHlbc_G18Stkg88-6_V9lmB8jNtiHdJLbvt_3OmXO0TBFiFQxpGoMWSHFmu4HV39t_L4=w1920-h1920-s-no" alt="Piñata 5" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczN9h8HwJjSZIctcgUiDsJ4AFv9radPLl5yAhubeKnCqAIA5OnDMyJuF705ZJAZ9G8aBsYA_6fSTNiTBDI-1ZAMCoSTUpMU7GGMm25MUBp3xZT1nTRFX=w1920-h1920-s-no" alt="Piñata 6" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNVMLoCcNuxzxm42znW9jRXqS99oDToduNXMbDNbNOlLU6uhBfWPJ19HlaGD9wQexpDPBeqA2ICdPxXIXym92G0X2QTer-Fb0ImgDUwJQuh8oiWSweo=w1920-h1920-s-no" alt="Piñata 7" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczM7Agqrmw6kDuNxOFkY3Cvf9n23Y0G3BDsuXb2WXS-4KXbzrh1ym7yFsSPFedlRXUbNIaJP-Tb_QkbOsrhOwNbyL21ybUQbWGTZSfDbSWitQmfHOB0L=w1920-h1920-s-no" alt="Piñata 8" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczNEA1QI-gObiF__BDKuhGfJFIUaeiJfUEyfCQkQYbjMQTUNZV6hprrLqXNldQrzqsqlPRvbxO2tJaKbXDXg87ra4hXKGvQejj5wGTANHicwiC52Bd5u=w1920-h1920-s-no" alt="Piñata 9" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczPgpDe4YSinE-fke-7PMIf0uTdPemlHAFXTUrmAti9gmWqvzgiI5cvJcUFwFm6MHtUORHVkc5WyWt65XW-GYCKibIx-RnvFdbKPlA2trOLxG45x_Em0=w1920-h1920-s-no" alt="Piñata 10" loading="lazy" draggable="false">
+    <img src="https://lh3.googleusercontent.com/pw/AP1GczMTCTV5HXccm7AIfpHLhXJxlFqK5hIh_GjTlpY6IdiaWhUhnQpSkPDvqav9iYZ3CHcGUm0IkE5Cam4qceIzoSBXPSxyc_1kGDfNOWal_s1nJ4ipoY8K=w1920-h1920-s-no" alt="Piñata 11" loading="lazy" draggable="false">
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div>
+    <div class="footer-name">Rene Linares</div>
+    <div class="footer-year">&copy; 2026</div>
+  </div>
+  <div class="footer-contact">
+    <a href="mailto:rene@linare.studio">rene@linare.studio</a>
+    <a href="#">Instagram</a>
+  </div>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  // ——— PAGE LOADER ———
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      document.getElementById('pageLoader').classList.add('hidden');
+    }, 600);
+  });
+
+  // ——— IMAGE LAZY REVEAL ———
+  document.querySelectorAll('.gallery-track img').forEach(function(img) {
+    if (img.complete) {
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', function() {
+        img.classList.add('loaded');
+      });
+    }
+  });
+
+  // ——— DRAG SCROLL ———
+  document.querySelectorAll('.gallery-track').forEach(function(track) {
+    var isDown = false;
+    var startX;
+    var scrollLeft;
+    var hasMoved = false;
+
+    track.addEventListener('mousedown', function(e) {
+      isDown = true;
+      hasMoved = false;
+      track.classList.add('dragging');
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+
+    track.addEventListener('mouseleave', function() {
+      isDown = false;
+      track.classList.remove('dragging');
+    });
+
+    track.addEventListener('mouseup', function() {
+      isDown = false;
+      track.classList.remove('dragging');
+    });
+
+    track.addEventListener('mousemove', function(e) {
+      if (!isDown) return;
+      e.preventDefault();
+      var x = e.pageX - track.offsetLeft;
+      var walk = (x - startX) * 1.5;
+      if (Math.abs(walk) > 3) hasMoved = true;
+      track.scrollLeft = scrollLeft - walk;
+    });
+
+    // Prevent click after drag
+    track.addEventListener('click', function(e) {
+      if (hasMoved) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+  });
+
+  // ——— SCROLL PROGRESS INDICATORS ———
+  document.querySelectorAll('.gallery-track').forEach(function(track) {
+    var galleryName = track.getAttribute('data-gallery');
+    var fill = document.querySelector('.scroll-progress-fill[data-gallery="' + galleryName + '"]');
+
+    track.addEventListener('scroll', function() {
+      if (!fill) return;
+      var maxScroll = track.scrollWidth - track.clientWidth;
+      var progress = maxScroll > 0 ? (track.scrollLeft / maxScroll) * 100 : 0;
+      fill.style.width = progress + '%';
+    });
+  });
+
+  // ——— INTERSECTION OBSERVER FOR REVEALS ———
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -60px 0px'
+  });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    revealObserver.observe(el);
+  });
+
+  // ——— SMOOTH NAV SCROLL ———
+  document.querySelectorAll('.nav-links a').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // ——— NAV BACKGROUND ON SCROLL ———
+  var nav = document.querySelector('.nav');
+  var lastScrollY = 0;
+
+  window.addEventListener('scroll', function() {
+    var scrollY = window.pageYOffset;
+    if (scrollY > 100) {
+      nav.style.background = 'linear-gradient(to bottom, var(--color-bg) 90%, transparent)';
+    } else {
+      nav.style.background = 'linear-gradient(to bottom, var(--color-bg) 60%, transparent)';
+    }
+    lastScrollY = scrollY;
+  }, { passive: true });
+
+  // ——— LIGHTBOX ———
+  var overlay = document.createElement('div');
+  overlay.className = 'lightbox-overlay';
+  overlay.innerHTML = '<button class="lightbox-close"></button><button class="lightbox-arrow prev"></button><button class="lightbox-arrow next"></button><img src="" alt=""><div class="lightbox-counter"></div>';
+  document.body.appendChild(overlay);
+
+  var lbImg = overlay.querySelector('img');
+  var lbCounter = overlay.querySelector('.lightbox-counter');
+  var lbClose = overlay.querySelector('.lightbox-close');
+  var lbPrev = overlay.querySelector('.lightbox-arrow.prev');
+  var lbNext = overlay.querySelector('.lightbox-arrow.next');
+
+  var currentImages = [];
+  var currentIndex = 0;
+
+  function showLightbox(images, index) {
+    currentImages = images;
+    currentIndex = index;
+    updateLightbox();
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function updateLightbox() {
+    lbImg.src = currentImages[currentIndex].src;
+    lbImg.alt = currentImages[currentIndex].alt || '';
+    lbCounter.textContent = (currentIndex + 1) + ' / ' + currentImages.length;
+    lbPrev.style.display = currentImages.length > 1 ? '' : 'none';
+    lbNext.style.display = currentImages.length > 1 ? '' : 'none';
+  }
+
+  function closeLightbox() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function goPrev() {
+    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+    updateLightbox();
+  }
+
+  function goNext() {
+    currentIndex = (currentIndex + 1) % currentImages.length;
+    updateLightbox();
+  }
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay || e.target === lbClose) closeLightbox();
+  });
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', function(e) { e.stopPropagation(); goPrev(); });
+  lbNext.addEventListener('click', function(e) { e.stopPropagation(); goNext(); });
+
+  document.addEventListener('keydown', function(e) {
+    if (!overlay.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowLeft') goPrev();
+    else if (e.key === 'ArrowRight') goNext();
+  });
+
+  // Attach click handlers to gallery images - group by gallery-track
+  document.querySelectorAll('.gallery-track').forEach(function(track) {
+    var imgs = Array.from(track.querySelectorAll('img'));
+    // Track drag state from parent track
+    var trackHasMoved = false;
+    track.addEventListener('mousedown', function() { trackHasMoved = false; });
+    track.addEventListener('mousemove', function() { trackHasMoved = true; });
+    imgs.forEach(function(img, idx) {
+      img.addEventListener('click', function(e) {
+        if (trackHasMoved) return;
+        e.stopPropagation();
+        showLightbox(imgs, idx);
+      });
+    });
+  });
+
+})();
+</script>
+</body>
+</html>

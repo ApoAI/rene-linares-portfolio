@@ -1,0 +1,10 @@
+{
+  "publishes": {
+    "mystic-quill-wsys": {
+      "siteUrl": "https://mystic-quill-wsys.here.now/"
+    },
+    "dusty-pagoda-rgze": {
+      "siteUrl": "https://dusty-pagoda-rgze.here.now/"
+    }
+  }
+}
