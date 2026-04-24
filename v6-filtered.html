@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rene Linares — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-bg: #fafaf9;
+  --color-text: #1a1a1a;
+  --color-text-secondary: rgba(26, 26, 26, 0.5);
+  --color-text-tertiary: rgba(26, 26, 26, 0.3);
+  --color-border: rgba(26, 26, 26, 0.08);
+  --color-surface: #f5f4f2;
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Space Grotesk', system-ui, sans-serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+::selection {
+  background: #1a1a1a;
+  color: #fafaf9;
+}
+
+html {
+  scroll-behavior: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ——— NAV ——— */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 24px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: normal;
+  background: linear-gradient(to bottom, var(--color-bg) 60%, transparent);
+  pointer-events: none;
+}
+
+.nav > * {
+  pointer-events: auto;
+}
+
+.nav-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color 0.4s var(--ease-out-expo);
+}
+
+.nav-links a:hover {
+  color: var(--color-text);
+}
+
+/* ——— HERO ——— */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 40px;
+  position: relative;
+}
+
+.hero-inner {
+  max-width: 1200px;
+}
+
+.hero-greeting {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  margin-bottom: 24px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s var(--ease-out-expo) 0.2s forwards;
+}
+
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 12vw, 180px);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeUp 1s var(--ease-out-expo) 0.4s forwards;
+}
+
+.hero-name em {
+  font-style: italic;
+}
+
+.hero-desc {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  max-width: 440px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s var(--ease-out-expo) 0.7s forwards;
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  animation: fadeUp 0.8s var(--ease-out-expo) 1s forwards;
+}
+
+.hero-scroll-hint span {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+}
+
+.scroll-line {
+  width: 48px;
+  height: 1px;
+  background: var(--color-text-tertiary);
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--color-text);
+  animation: scrollLine 2s var(--ease-in-out-expo) infinite;
+}
+
+@keyframes scrollLine {
+  0% { left: -100%; }
+  50% { left: 0; }
+  100% { left: 100%; }
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ——— CATEGORY SECTIONS ——— */
+.category {
+  padding: 80px 0 0;
+  position: relative;
+}
+
+.category-header {
+  padding: 0 40px;
+  margin-bottom: 48px;
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+}
+
+.category-number {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--color-text-tertiary);
+}
+
+.category-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.category-count {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--color-text-tertiary);
+  margin-left: auto;
+}
+
+/* ——— HORIZONTAL GALLERY ——— */
+.gallery-track {
+  display: flex;
+  gap: 16px;
+  padding: 0 40px 24px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x proximity;
+}
+
+.gallery-track::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-track.dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
+
+.gallery-track img {
+  flex: 0 0 auto;
+  height: 70vh;
+  max-height: 600px;
+  width: auto;
+  min-width: 200px;
+  object-fit: contain;
+  border-radius: 2px;
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  transition: opacity 0.8s var(--ease-out-expo),
+              transform 0.8s var(--ease-out-expo),
+              filter 0.6s var(--ease-out-expo);
+  scroll-snap-align: start;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.gallery-track img.loaded {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.gallery-track img:hover {
+  transform: translateY(-4px) scale(1.005);
+  filter: brightness(1.02);
+}
+
+/* ——— SCROLL INDICATOR ——— */
+.scroll-indicator {
+  padding: 0 40px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.scroll-progress-track {
+  flex: 1;
+  max-width: 200px;
+  height: 1px;
+  background: var(--color-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--color-text);
+  transition: width 0.15s var(--ease-out-quart);
+}
+
+.scroll-indicator-label {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+}
+
+/* ——— DIVIDER ——— */
+.divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: 80px 40px 0;
+}
+
+/* ——— FOOTER ——— */
+.footer {
+  padding: 80px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 1px solid var(--color-border);
+  margin-top: 80px;
+}
+
+.footer-name {
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: -0.01em;
+}
+
+.footer-contact {
+  text-align: right;
+}
+
+.footer-contact a {
+  display: block;
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  margin-bottom: 4px;
+  transition: color 0.4s var(--ease-out-expo);
+}
+
+.footer-contact a:hover {
+  color: var(--color-text);
+}
+
+.footer-year {
+  font-size: 11px;
+  color: var(--color-text-tertiary);
+  margin-top: 16px;
+}
+
+/* ——— INTERSECTION OBSERVER ANIMATIONS ——— */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s var(--ease-out-expo),
+              transform 0.8s var(--ease-out-expo);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ——— RESPONSIVE ——— */
+@media (max-width: 768px) {
+  .nav {
+    padding: 16px 20px;
+  }
+
+  .nav-links {
+    gap: 16px;
+  }
+
+  .hero {
+    padding: 0 20px;
+  }
+
+  .hero-name {
+    font-size: clamp(48px, 14vw, 96px);
+  }
+
+  .category-header {
+    padding: 0 20px;
+    flex-wrap: wrap;
+  }
+
+  .gallery-track {
+    padding: 0 20px 20px;
+    gap: 10px;
+  }
+
+  .gallery-track img {
+    height: 55vh;
+    max-height: 400px;
+  }
+
+  .scroll-indicator {
+    padding: 0 20px;
+  }
+
+  .divider {
+    margin: 60px 20px 0;
+  }
+
+  .footer {
+    padding: 60px 20px;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .footer-contact {
+    text-align: left;
+  }
+
+  .hero-scroll-hint {
+    left: 20px;
+    bottom: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-track img {
+    height: 45vh;
+    max-height: 320px;
+  }
+
+  .category-count {
+    display: none;
+  }
+}
+
+/* ——— LOADING ——— */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  background: var(--color-bg);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s var(--ease-out-expo),
+              visibility 0.6s;
+}
+
+.page-loader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-text {
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  opacity: 0;
+  animation: loaderPulse 1.2s var(--ease-in-out-expo) infinite;
+}
+
+@keyframes loaderPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div class="page-loader" id="pageLoader">
+  <span class="loader-text">Rene Linares</span>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#" class="nav-name">Rene Linares</a>
+  <ul class="nav-links">
+    <li><a href="#poetry">Poetry</a></li>
+    <li><a href="#acrylic">Painting</a></li>
+    <li><a href="#stage">Stage Design</a></li>
+    <li><a href="#costume">Costume</a></li>
+    <li><a href="#shadow">Shadow</a></li>
+    <li><a href="#pinata">Piñatas</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-greeting">Artist &amp; Designer</p>
+    <h1 class="hero-name">Rene<br><em>Linares</em></h1>
+    <p class="hero-desc">Visual artist working across poetry, painting, stage design, costume, shadow puppetry, and piñata making. Each discipline informs the other.</p>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- POETRY -->
+<section class="category reveal" id="poetry">
+  <div class="category-header">
+    <span class="category-number">01</span>
+    <h2 class="category-title">Poetry</h2>
+    <span class="category-count">10 works</span>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-progress-track"><div class="scroll-progress-fill" data-gallery="poetry"></div></div>
+    <span class="scroll-indicator-label">Drag to explore</span>
+  </div>
+  <div class="gallery-track" data-gallery="poetry">
+    <img src="images/poetry/poetry_01.jpg" alt="Poetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/poetry/poetry_02.jpg" alt="Poetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/poetry/poetry_03.jpg" alt="Poetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/poetry/poetry_04.jpg" alt="Poetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/poetry/poetry_05.jpg" alt="Poetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/poetry/poetry_06.jpg" alt="Poetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/poetry/poetry_07.jpg" alt="Poetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/poetry/poetry_08.jpg" alt="Poetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/poetry/poetry_09.jpg" alt="Poetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/poetry/poetry_10.jpg" alt="Poetry by Rene Linares" loading="lazy" draggable="false">
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ACRYLIC PAINTING & ILLUSTRATION -->
+<section class="category reveal" id="acrylic">
+  <div class="category-header">
+    <span class="category-number">02</span>
+    <h2 class="category-title">Acrylic Painting &amp; Illustration</h2>
+    <span class="category-count">11 works</span>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-progress-track"><div class="scroll-progress-fill" data-gallery="acrylic"></div></div>
+    <span class="scroll-indicator-label">Drag to explore</span>
+  </div>
+  <div class="gallery-track" data-gallery="acrylic">
+    <img src="images/acrylic/acrylic_01.jpg" alt="Acrylic painting by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/acrylic/acrylic_02.jpg" alt="Acrylic painting by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/acrylic/acrylic_04.jpg" alt="Acrylic painting by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/acrylic/acrylic_05.jpg" alt="Acrylic painting by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/acrylic/acrylic_06.jpg" alt="Acrylic painting by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/acrylic/acrylic_07.jpg" alt="Acrylic painting by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/acrylic/acrylic_08.jpg" alt="Acrylic painting by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/acrylic/acrylic_09.jpg" alt="Acrylic painting by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/acrylic/acrylic_10.jpg" alt="Acrylic painting by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/acrylic/acrylic_11.jpg" alt="Acrylic painting by Rene Linares" loading="lazy" draggable="false">
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STAGE DESIGN -->
+<section class="category reveal" id="stage">
+  <div class="category-header">
+    <span class="category-number">03</span>
+    <h2 class="category-title">Stage Design</h2>
+    <span class="category-count">30 works</span>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-progress-track"><div class="scroll-progress-fill" data-gallery="stage"></div></div>
+    <span class="scroll-indicator-label">Drag to explore</span>
+  </div>
+  <div class="gallery-track" data-gallery="stage">
+    <img src="images/stage/stage_01.jpg" alt="Production 1" loading="lazy" draggable="false">
+    <img src="images/stage/stage_02.jpg" alt="Production 2" loading="lazy" draggable="false">
+    <img src="images/stage/stage_03.jpg" alt="Production 3" loading="lazy" draggable="false">
+    <img src="images/stage/stage_04.jpg" alt="Production 4" loading="lazy" draggable="false">
+    <img src="images/stage/stage_05.jpg" alt="Production 5" loading="lazy" draggable="false">
+    <img src="images/stage/stage_06.jpg" alt="Production 6" loading="lazy" draggable="false">
+    <img src="images/stage/stage_07.jpg" alt="Production 7" loading="lazy" draggable="false">
+    <img src="images/stage/stage_08.jpg" alt="Production 8" loading="lazy" draggable="false">
+    <img src="images/stage/stage_09.jpg" alt="Production 9" loading="lazy" draggable="false">
+    <img src="images/stage/stage_10.jpg" alt="Production 10" loading="lazy" draggable="false">
+    <img src="images/stage/stage_11.jpg" alt="Production 11" loading="lazy" draggable="false">
+    <img src="images/stage/stage_12.jpg" alt="Production 12" loading="lazy" draggable="false">
+    <img src="images/stage/stage_13.jpg" alt="Production 13" loading="lazy" draggable="false">
+    <img src="images/stage/stage_14.jpg" alt="Production 14" loading="lazy" draggable="false">
+    <img src="images/stage/stage_15.jpg" alt="Production 15" loading="lazy" draggable="false">
+    <img src="images/stage/stage_16.jpg" alt="Production 16" loading="lazy" draggable="false">
+    <img src="images/stage/stage_17.jpg" alt="Production 17" loading="lazy" draggable="false">
+    <img src="images/stage/stage_18.jpg" alt="Production 18" loading="lazy" draggable="false">
+    <img src="images/stage/stage_19.jpg" alt="Production 19" loading="lazy" draggable="false">
+    <img src="images/stage/stage_20.jpg" alt="Production 20" loading="lazy" draggable="false">
+    <img src="images/stage/stage_21.jpg" alt="Production 21" loading="lazy" draggable="false">
+    <img src="images/stage/stage_22.jpg" alt="Production 22" loading="lazy" draggable="false">
+    <img src="images/stage/stage_23.jpg" alt="Production 23" loading="lazy" draggable="false">
+    <img src="images/stage/stage_24.jpg" alt="Production 24" loading="lazy" draggable="false">
+    <img src="images/stage/stage_25.jpg" alt="Production 25" loading="lazy" draggable="false">
+    <img src="images/stage/stage_26.jpg" alt="Production 26" loading="lazy" draggable="false">
+    <img src="images/stage/stage_27.jpg" alt="Production 27" loading="lazy" draggable="false">
+    <img src="images/stage/stage_28.jpg" alt="Production 28" loading="lazy" draggable="false">
+    <img src="images/stage/stage_29.jpg" alt="Production 29" loading="lazy" draggable="false">
+    <img src="images/stage/stage_30.jpg" alt="Production 30" loading="lazy" draggable="false">
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COSTUME DESIGN -->
+<section class="category reveal" id="costume">
+  <div class="category-header">
+    <span class="category-number">04</span>
+    <h2 class="category-title">Costume Design</h2>
+    <span class="category-count">18 works</span>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-progress-track"><div class="scroll-progress-fill" data-gallery="costume"></div></div>
+    <span class="scroll-indicator-label">Drag to explore</span>
+  </div>
+  <div class="gallery-track" data-gallery="costume">
+    <img src="images/costume/costume_01.jpg" alt="Costume design by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/costume/costume_02.jpg" alt="Costume design by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/costume/costume_03.jpg" alt="Costume design by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/costume/costume_04.jpg" alt="Costume design by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/costume/costume_05.jpg" alt="Costume design by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/costume/costume_06.jpg" alt="Costume design by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/costume/costume_07.jpg" alt="Costume design by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/costume/costume_08.jpg" alt="Costume design by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/costume/costume_09.jpg" alt="Costume design by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/costume/costume_10.jpg" alt="Costume design by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/costume/costume_11.jpg" alt="Costume design by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/costume/costume_12.jpg" alt="Costume design by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/costume/costume_13.jpg" alt="Costume design by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/costume/costume_14.jpg" alt="Costume design by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/costume/costume_15.jpg" alt="Costume design by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/costume/costume_16.jpg" alt="Costume design by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/costume/costume_17.jpg" alt="Costume design by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/costume/costume_18.jpg" alt="Costume design by Rene Linares" loading="lazy" draggable="false">
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SHADOW PUPPETRY & STOP MOTION -->
+<section class="category reveal" id="shadow">
+  <div class="category-header">
+    <span class="category-number">05</span>
+    <h2 class="category-title">Shadow Puppetry &amp; Stop Motion</h2>
+    <span class="category-count">22 works</span>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-progress-track"><div class="scroll-progress-fill" data-gallery="shadow"></div></div>
+    <span class="scroll-indicator-label">Drag to explore</span>
+  </div>
+  <div class="gallery-track" data-gallery="shadow">
+    <img src="images/shadow/shadow_01.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_02.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_03.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_04.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_05.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_06.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_07.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_08.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_09.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_10.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_11.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_13.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_14.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_15.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_16.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_17.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_18.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_19.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_20.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_21.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+    <img src="images/shadow/shadow_22.jpg" alt="Shadow puppetry by Rene Linares" loading="lazy" draggable="false">
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PIÑATAS TOYS & MASKS -->
+<section class="category reveal" id="pinata">
+  <div class="category-header">
+    <span class="category-number">06</span>
+    <h2 class="category-title">Piñatas Toys &amp; Masks</h2>
+    <span class="category-count">11 works</span>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-progress-track"><div class="scroll-progress-fill" data-gallery="pinata"></div></div>
+    <span class="scroll-indicator-label">Drag to explore</span>
+  </div>
+  <div class="gallery-track" data-gallery="pinata">
+    <img src="images/pinata/pinata_01.jpg" alt="Piñata 1" loading="lazy" draggable="false">
+    <img src="images/pinata/pinata_02.jpg" alt="Piñata 2" loading="lazy" draggable="false">
+    <img src="images/pinata/pinata_03.jpg" alt="Piñata 3" loading="lazy" draggable="false">
+    <img src="images/pinata/pinata_05.jpg" alt="Piñata 5" loading="lazy" draggable="false">
+    <img src="images/pinata/pinata_06.jpg" alt="Piñata 6" loading="lazy" draggable="false">
+    <img src="images/pinata/pinata_07.jpg" alt="Piñata 7" loading="lazy" draggable="false">
+    <img src="images/pinata/pinata_08.jpg" alt="Piñata 8" loading="lazy" draggable="false">
+    <img src="images/pinata/pinata_09.jpg" alt="Piñata 9" loading="lazy" draggable="false">
+    <img src="images/pinata/pinata_10.jpg" alt="Piñata 10" loading="lazy" draggable="false">
+    <img src="images/pinata/pinata_11.jpg" alt="Piñata 11" loading="lazy" draggable="false">
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div>
+    <div class="footer-name">Rene Linares</div>
+    <div class="footer-year">&copy; 2025</div>
+  </div>
+  <div class="footer-contact">
+    <a href="mailto:rene@linare.studio">rene@linare.studio</a>
+    <a href="#">Instagram</a>
+  </div>
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  // ——— PAGE LOADER ———
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      document.getElementById('pageLoader').classList.add('hidden');
+    }, 600);
+  });
+
+  // ——— IMAGE LAZY REVEAL ———
+  document.querySelectorAll('.gallery-track img').forEach(function(img) {
+    if (img.complete) {
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', function() {
+        img.classList.add('loaded');
+      });
+    }
+  });
+
+  // ——— DRAG SCROLL ———
+  document.querySelectorAll('.gallery-track').forEach(function(track) {
+    var isDown = false;
+    var startX;
+    var scrollLeft;
+    var hasMoved = false;
+
+    track.addEventListener('mousedown', function(e) {
+      isDown = true;
+      hasMoved = false;
+      track.classList.add('dragging');
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+
+    track.addEventListener('mouseleave', function() {
+      isDown = false;
+      track.classList.remove('dragging');
+    });
+
+    track.addEventListener('mouseup', function() {
+      isDown = false;
+      track.classList.remove('dragging');
+    });
+
+    track.addEventListener('mousemove', function(e) {
+      if (!isDown) return;
+      e.preventDefault();
+      var x = e.pageX - track.offsetLeft;
+      var walk = (x - startX) * 1.5;
+      if (Math.abs(walk) > 3) hasMoved = true;
+      track.scrollLeft = scrollLeft - walk;
+    });
+
+    // Prevent click after drag
+    track.addEventListener('click', function(e) {
+      if (hasMoved) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+  });
+
+  // ——— SCROLL PROGRESS INDICATORS ———
+  document.querySelectorAll('.gallery-track').forEach(function(track) {
+    var galleryName = track.getAttribute('data-gallery');
+    var fill = document.querySelector('.scroll-progress-fill[data-gallery="' + galleryName + '"]');
+
+    track.addEventListener('scroll', function() {
+      if (!fill) return;
+      var maxScroll = track.scrollWidth - track.clientWidth;
+      var progress = maxScroll > 0 ? (track.scrollLeft / maxScroll) * 100 : 0;
+      fill.style.width = progress + '%';
+    });
+  });
+
+  // ——— INTERSECTION OBSERVER FOR REVEALS ———
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -60px 0px'
+  });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    revealObserver.observe(el);
+  });
+
+  // ——— SMOOTH NAV SCROLL ———
+  document.querySelectorAll('.nav-links a').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // ——— NAV BACKGROUND ON SCROLL ———
+  var nav = document.querySelector('.nav');
+  var lastScrollY = 0;
+
+  window.addEventListener('scroll', function() {
+    var scrollY = window.pageYOffset;
+    if (scrollY > 100) {
+      nav.style.background = 'linear-gradient(to bottom, var(--color-bg) 90%, transparent)';
+    } else {
+      nav.style.background = 'linear-gradient(to bottom, var(--color-bg) 60%, transparent)';
+    }
+    lastScrollY = scrollY;
+  }, { passive: true });
+
+})();
+</script>
+</body>
+</html>

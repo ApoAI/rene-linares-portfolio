@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rene Linares — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --warm-white: #fafaf9;
+  --off-black: #1a1a1a;
+  --mid-gray: #6b6b6b;
+  --light-gray: #e8e6e3;
+  --accent: #c4392d;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --sans: 'Space Grotesk', system-ui, sans-serif;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-circ: cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: var(--sans);
+  background: var(--warm-white);
+  color: var(--off-black);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection { background: var(--off-black); color: var(--warm-white); }
+
+/* ---- NAV ---- */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  padding: 1.25rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  mix-blend-mode: difference;
+  color: #fff;
+  transition: transform 0.6s var(--ease-out-expo);
+}
+.nav.hidden { transform: translateY(-100%); }
+.nav-logo {
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 2px;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: #fff;
+  transition: width 0.4s var(--ease-out-expo);
+}
+.nav-links a:hover::after { width: 100%; }
+
+/* ---- HERO ---- */
+.hero {
+  height: 100vh; min-height: 700px;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 2.5rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: var(--off-black);
+}
+.hero-bg img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.45;
+  transform: scale(1.05);
+  transition: transform 8s var(--ease-out-expo);
+}
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(26,26,26,0.9) 0%, rgba(26,26,26,0.3) 50%, transparent 100%);
+}
+.hero-content { position: relative; z-index: 2; color: #fff; max-width: 1400px; }
+.hero-overline {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 1.5rem;
+}
+.hero-title {
+  font-family: var(--serif);
+  font-size: clamp(4rem, 12vw, 11rem);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  margin-bottom: 2rem;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--light-gray);
+}
+.hero-sub {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 300;
+  max-width: 480px;
+  line-height: 1.6;
+  opacity: 0.7;
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  opacity: 0.4;
+}
+.hero-scroll span {
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.scroll-line {
+  width: 1px; height: 40px;
+  background: #fff;
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { transform: scaleY(1); opacity: 0.4; }
+  50% { transform: scaleY(0.5); opacity: 1; }
+}
+
+/* ---- SECTION SHARED ---- */
+.section { padding: 8rem 0; position: relative; }
+.section-dark { background: var(--off-black); color: var(--warm-white); }
+.section-light { background: var(--warm-white); color: var(--off-black); }
+
+.section-header {
+  padding: 0 2.5rem;
+  margin-bottom: 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: end;
+}
+.section-number {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  opacity: 0.4;
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.section-title em { font-style: italic; }
+.section-desc {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.7;
+  opacity: 0.6;
+  max-width: 380px;
+  justify-self: end;
+}
+.section-dark .section-number { opacity: 0.3; }
+.section-dark .section-desc { opacity: 0.5; }
+
+/* ---- EDITORIAL GRIDS ---- */
+/* Spread: full-bleed hero image with offset text */
+.spread {
+  position: relative;
+  margin: 2rem 0;
+  overflow: hidden;
+}
+.spread-img {
+  width: 100%;
+  height: 75vh;
+  min-height: 500px;
+  object-fit: cover;
+  display: block;
+}
+.spread-overlay {
+  position: absolute;
+  bottom: 0; left: 0;
+  padding: 3rem 2.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  color: #fff;
+  width: 60%;
+}
+.spread-label {
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 0.5rem;
+}
+
+/* Asymmetric 2-col grid */
+.grid-asym {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 1rem;
+  padding: 0 2.5rem;
+  margin-bottom: 1rem;
+}
+.grid-asym-reverse {
+  grid-template-columns: 1fr 1.4fr;
+}
+.grid-asym .img-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.grid-asym .img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s var(--ease-out-expo);
+}
+.grid-asym .img-wrap:hover img {
+  transform: scale(1.04);
+}
+
+/* Triptych / 3-col */
+.grid-tri {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 0.8fr;
+  gap: 1rem;
+  padding: 0 2.5rem;
+  margin-bottom: 1rem;
+}
+.grid-tri .img-wrap { overflow: hidden; }
+.grid-tri .img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s var(--ease-out-expo);
+}
+.grid-tri .img-wrap:hover img { transform: scale(1.04); }
+
+/* Stacked pair with offset */
+.stack-offset {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 0 2.5rem;
+  margin-bottom: 1rem;
+}
+.stack-offset .img-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.stack-offset .img-col:last-child {
+  margin-top: 4rem;
+}
+.stack-offset .img-wrap { overflow: hidden; }
+.stack-offset .img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s var(--ease-out-expo);
+}
+.stack-offset .img-wrap:hover img { transform: scale(1.04); }
+
+/* Full-bleed single */
+.full-bleed {
+  width: 100%;
+  height: 70vh;
+  min-height: 450px;
+  object-fit: cover;
+  display: block;
+  margin: 1rem 0;
+}
+
+/* Masonry-style grid */
+.grid-masonry {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 0 2.5rem;
+  margin-bottom: 1rem;
+}
+.grid-masonry .img-wrap { overflow: hidden; }
+.grid-masonry .img-wrap.tall { grid-row: span 2; }
+.grid-masonry .img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s var(--ease-out-expo);
+}
+.grid-masonry .img-wrap:hover img { transform: scale(1.04); }
+
+/* Breakout image (bleeds right) */
+.breakout {
+  position: relative;
+  margin: 2rem 0;
+  padding-left: 2.5rem;
+}
+.breakout-img {
+  width: calc(100% - 2.5rem);
+  height: 65vh;
+  min-height: 400px;
+  object-fit: cover;
+  display: block;
+  margin-left: auto;
+}
+.breakout-caption {
+  position: absolute;
+  bottom: 2rem; left: 2.5rem;
+  max-width: 280px;
+  background: var(--warm-white);
+  padding: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  font-weight: 300;
+}
+.section-dark .breakout-caption {
+  background: var(--off-black);
+  color: var(--warm-white);
+}
+
+/* Editorial row with text block */
+.edit-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 0 2.5rem;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+.edit-row .text-block {
+  padding: 2rem;
+}
+.edit-row .text-block h3 {
+  font-family: var(--serif);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.edit-row .text-block h3 em { font-style: italic; }
+.edit-row .text-block p {
+  font-size: 0.9375rem;
+  font-weight: 300;
+  line-height: 1.7;
+  opacity: 0.6;
+}
+.edit-row .img-wrap { overflow: hidden; }
+.edit-row .img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s var(--ease-out-expo);
+}
+.edit-row .img-wrap:hover img { transform: scale(1.04); }
+
+/* 2-col simple */
+.grid-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 0 2.5rem;
+  margin-bottom: 1rem;
+}
+.grid-duo .img-wrap { overflow: hidden; }
+.grid-duo .img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s var(--ease-out-expo);
+}
+.grid-duo .img-wrap:hover img { transform: scale(1.04); }
+
+/* 4-col grid */
+.grid-quad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding: 0 2.5rem;
+  margin-bottom: 1rem;
+}
+.grid-quad .img-wrap { overflow: hidden; }
+.grid-quad .img-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s var(--ease-out-expo);
+}
+.grid-quad .img-wrap:hover img { transform: scale(1.04); }
+
+/* Pullquote */
+.pullquote {
+  padding: 6rem 2.5rem;
+  text-align: center;
+}
+.pullquote-text {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.pullquote-text em { font-style: italic; }
+
+/* ---- FOOTER ---- */
+.footer {
+  background: var(--off-black);
+  color: var(--warm-white);
+  padding: 6rem 2.5rem 3rem;
+}
+.footer-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 4rem;
+}
+.footer-name {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 6vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+.footer-name em { font-style: italic; opacity: 0.5; }
+.footer-tagline {
+  font-size: 0.9375rem;
+  font-weight: 300;
+  line-height: 1.7;
+  opacity: 0.5;
+  max-width: 320px;
+}
+.footer-col h4 {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0.4;
+  margin-bottom: 1.25rem;
+}
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 0.75rem; }
+.footer-col a {
+  color: var(--warm-white);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 300;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+.footer-col a:hover { opacity: 1; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  opacity: 0.3;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ---- REVEAL ANIMATIONS ---- */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ---- LIGHTBOX ---- */
+.lightbox {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+  padding: 2rem;
+}
+.lightbox.active { display: flex; }
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  cursor: default;
+}
+.lightbox-close {
+  position: absolute;
+  top: 1.5rem; right: 2rem;
+  color: #fff;
+  font-size: 1.5rem;
+  background: none; border: none;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+  font-family: var(--sans);
+}
+.lightbox-close:hover { opacity: 1; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 1024px) {
+  .section-header { grid-template-columns: 1fr; }
+  .section-desc { justify-self: start; margin-top: 1rem; }
+  .grid-asym, .grid-asym-reverse { grid-template-columns: 1fr 1fr; }
+  .grid-tri { grid-template-columns: 1fr 1fr; }
+  .grid-quad { grid-template-columns: 1fr 1fr; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav { padding: 1rem 1.25rem; }
+  .nav-links { display: none; }
+  .hero { padding: 0 1.25rem 3rem; }
+  .section { padding: 5rem 0; }
+  .section-header { padding: 0 1.25rem; margin-bottom: 2.5rem; }
+  .grid-asym, .grid-asym-reverse { grid-template-columns: 1fr; }
+  .grid-tri { grid-template-columns: 1fr; }
+  .grid-masonry { grid-template-columns: 1fr 1fr; }
+  .grid-masonry .img-wrap.tall { grid-row: span 1; }
+  .stack-offset { grid-template-columns: 1fr; }
+  .stack-offset .img-col:last-child { margin-top: 0; }
+  .edit-row { grid-template-columns: 1fr; }
+  .grid-duo { grid-template-columns: 1fr; }
+  .grid-quad { grid-template-columns: 1fr 1fr; }
+  .spread-overlay { width: 100%; }
+  .breakout { padding-left: 1.25rem; }
+  .breakout-img { width: 100%; height: 50vh; }
+  .breakout-caption { position: relative; bottom: auto; left: auto; margin-top: 1rem; }
+  .full-bleed { height: 45vh; }
+  .pullquote { padding: 4rem 1.25rem; }
+  .footer { padding: 4rem 1.25rem 2rem; }
+  .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .grid-asym, .grid-asym-reverse, .grid-tri, .grid-masonry, .stack-offset, .edit-row, .grid-duo, .grid-quad {
+    padding: 0 1.25rem;
+  }
+}
+@media (max-width: 480px) {
+  .hero-title { font-size: clamp(3rem, 15vw, 5rem); }
+  .section-title { font-size: clamp(2rem, 10vw, 3rem); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo">Rene Linares</a>
+  <ul class="nav-links">
+    <li><a href="#poetry">Poetry</a></li>
+    <li><a href="#acrylic">Acrylic</a></li>
+    <li><a href="#stage">Stage Design</a></li>
+    <li><a href="#costume">Costume</a></li>
+    <li><a href="#shadow">Shadow</a></li>
+    <li><a href="#pinata">Piñatas</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <img src="images/stage/stage_01.jpg" alt="Rene Linares stage design">
+  </div>
+  <div class="hero-content">
+    <div class="hero-overline">Artist &middot; Designer &middot; Maker</div>
+    <h1 class="hero-title">Rene<br><em>Linares</em></h1>
+    <p class="hero-sub">Poet, painter, stage designer, puppeteer — crafting worlds where art meets spectacle.</p>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ====== POETRY ====== -->
+<section class="section section-dark" id="poetry">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-number">01</div>
+      <h2 class="section-title">Poetry</h2>
+    </div>
+    <p class="section-desc">Words as material — verse sculpted into visual form, where language becomes landscape.</p>
+  </div>
+
+  <div class="spread reveal">
+    <img class="spread-img" src="images/poetry/poetry_01.jpg" alt="Poetry work">
+    <div class="spread-overlay">
+      <div class="spread-label">Poetry</div>
+    </div>
+  </div>
+
+  <div class="grid-asym reveal">
+    <div class="img-wrap"><img src="images/poetry/poetry_02.jpg" alt="Poetry"></div>
+    <div class="img-wrap"><img src="images/poetry/poetry_03.jpg" alt="Poetry"></div>
+  </div>
+
+  <div class="edit-row reveal">
+    <div class="text-block">
+      <h3>The Written<br><em>Image</em></h3>
+      <p>Each poem is a composition — text arranged not just for meaning, but for the rhythm of the eye across the page.</p>
+    </div>
+    <div class="img-wrap"><img src="images/poetry/poetry_04.jpg" alt="Poetry"></div>
+  </div>
+
+  <div class="grid-asym grid-asym-reverse reveal">
+    <div class="img-wrap"><img src="images/poetry/poetry_05.jpg" alt="Poetry"></div>
+    <div class="img-wrap"><img src="images/poetry/poetry_06.jpg" alt="Poetry"></div>
+  </div>
+
+  <div class="grid-tri reveal">
+    <div class="img-wrap"><img src="images/poetry/poetry_07.jpg" alt="Poetry"></div>
+    <div class="img-wrap"><img src="images/poetry/poetry_08.jpg" alt="Poetry"></div>
+    <div class="img-wrap"><img src="images/poetry/poetry_09.jpg" alt="Poetry"></div>
+  </div>
+
+  <div class="breakout reveal">
+    <img class="breakout-img" src="images/poetry/poetry_10.jpg" alt="Poetry">
+    <div class="breakout-caption">Poetry becomes visual — each line a stroke, each stanza a frame.</div>
+  </div>
+</section>
+
+<!-- ====== ACRYLIC ====== -->
+<section class="section section-light" id="acrylic">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-number">02</div>
+      <h2 class="section-title">Acrylic Painting<br><em>&amp; Illustration</em></h2>
+    </div>
+    <p class="section-desc">Bold color, decisive gesture — paintings and illustrations that pulse with life.</p>
+  </div>
+
+  <div class="spread reveal">
+    <img class="spread-img" src="images/acrylic/acrylic_01.jpg" alt="Acrylic painting">
+    <div class="spread-overlay">
+      <div class="spread-label">Acrylic Painting &amp; Illustration</div>
+    </div>
+  </div>
+
+  <div class="grid-asym reveal">
+    <div class="img-wrap"><img src="images/acrylic/acrylic_02.jpg" alt="Acrylic"></div>
+  </div>
+
+  <div class="edit-row reveal">
+    <div class="img-wrap"><img src="images/acrylic/acrylic_04.jpg" alt="Acrylic"></div>
+    <div class="text-block">
+      <h3>Color as<br><em>Conviction</em></h3>
+      <p>Every stroke is a declaration — acrylic laid down with the certainty of a voice that knows what it wants to say.</p>
+    </div>
+  </div>
+
+  <div class="grid-asym grid-asym-reverse reveal">
+    <div class="img-wrap"><img src="images/acrylic/acrylic_05.jpg" alt="Acrylic"></div>
+    <div class="img-wrap"><img src="images/acrylic/acrylic_06.jpg" alt="Acrylic"></div>
+  </div>
+
+  <div class="grid-tri reveal">
+    <div class="img-wrap"><img src="images/acrylic/acrylic_07.jpg" alt="Acrylic"></div>
+    <div class="img-wrap"><img src="images/acrylic/acrylic_08.jpg" alt="Acrylic"></div>
+    <div class="img-wrap"><img src="images/acrylic/acrylic_09.jpg" alt="Acrylic"></div>
+  </div>
+
+  <div class="grid-duo reveal">
+    <div class="img-wrap"><img src="images/acrylic/acrylic_10.jpg" alt="Acrylic"></div>
+    <div class="img-wrap"><img src="images/acrylic/acrylic_11.jpg" alt="Acrylic"></div>
+  </div>
+</section>
+
+<!-- ====== STAGE DESIGN ====== -->
+<section class="section section-dark" id="stage">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-number">03</div>
+      <h2 class="section-title">Stage<br><em>Design</em></h2>
+    </div>
+    <p class="section-desc">Stages transformed — environments that become characters in their own right.</p>
+  </div>
+
+  <div class="spread reveal">
+    <img class="spread-img" src="images/stage/stage_02.jpg" alt="Production design">
+    <div class="spread-overlay">
+      <div class="spread-label">Stage Design</div>
+    </div>
+  </div>
+
+  <div class="grid-asym reveal">
+    <div class="img-wrap"><img src="images/stage/stage_03.jpg" alt="Stage"></div>
+    <div class="img-wrap"><img src="images/stage/stage_04.jpg" alt="Stage"></div>
+  </div>
+
+  <div class="edit-row reveal">
+    <div class="text-block">
+      <h3>Worlds<br><em>Onstage</em></h3>
+      <p>Every set is a story before the actors arrive — architecture of imagination built from light, wood, and paint.</p>
+    </div>
+    <div class="img-wrap"><img src="images/stage/stage_05.jpg" alt="Stage"></div>
+  </div>
+
+  <div class="grid-masonry reveal">
+    <div class="img-wrap tall"><img src="images/stage/stage_06.jpg" alt="Stage"></div>
+    <div class="img-wrap"><img src="images/stage/stage_07.jpg" alt="Stage"></div>
+    <div class="img-wrap"><img src="images/stage/stage_08.jpg" alt="Stage"></div>
+    <div class="img-wrap"><img src="images/stage/stage_09.jpg" alt="Stage"></div>
+    <div class="img-wrap tall"><img src="images/stage/stage_10.jpg" alt="Stage"></div>
+  </div>
+
+  <div class="grid-quad reveal">
+    <div class="img-wrap"><img src="images/stage/stage_11.jpg" alt="Stage"></div>
+    <div class="img-wrap"><img src="images/stage/stage_12.jpg" alt="Stage"></div>
+    <div class="img-wrap"><img src="images/stage/stage_13.jpg" alt="Stage"></div>
+    <div class="img-wrap"><img src="images/stage/stage_14.jpg" alt="Stage"></div>
+  </div>
+
+  <div class="grid-asym grid-asym-reverse reveal">
+    <div class="img-wrap"><img src="images/stage/stage_15.jpg" alt="Stage"></div>
+    <div class="img-wrap"><img src="images/stage/stage_16.jpg" alt="Stage"></div>
+  </div>
+
+  <div class="breakout reveal">
+    <img class="breakout-img" src="images/stage/stage_17.jpg" alt="Stage">
+    <div class="breakout-caption">The stage as canvas — every surface painted, every angle composed.</div>
+  </div>
+
+  <div class="grid-tri reveal">
+    <div class="img-wrap"><img src="images/stage/stage_18.jpg" alt="Stage"></div>
+    <div class="img-wrap"><img src="images/stage/stage_19.jpg" alt="Stage"></div>
+    <div class="img-wrap"><img src="images/stage/stage_20.jpg" alt="Stage"></div>
+  </div>
+
+  <div class="grid-duo reveal">
+    <div class="img-wrap"><img src="images/stage/stage_21.jpg" alt="Stage"></div>
+    <div class="img-wrap"><img src="images/stage/stage_22.jpg" alt="Stage"></div>
+  </div>
+
+  <div class="grid-quad reveal">
+    <div class="img-wrap"><img src="images/stage/stage_23.jpg" alt="Stage"></div>
+    <div class="img-wrap"><img src="images/stage/stage_24.jpg" alt="Stage"></div>
+    <div class="img-wrap"><img src="images/stage/stage_25.jpg" alt="Stage"></div>
+    <div class="img-wrap"><img src="images/stage/stage_26.jpg" alt="Stage"></div>
+  </div>
+
+  <div class="grid-asym reveal">
+    <div class="img-wrap"><img src="images/stage/stage_27.jpg" alt="Stage"></div>
+    <div class="img-wrap"><img src="images/stage/stage_28.jpg" alt="Stage"></div>
+  </div>
+
+  <div class="grid-tri reveal">
+    <div class="img-wrap"><img src="images/stage/stage_29.jpg" alt="Stage"></div>
+    <div class="img-wrap"><img src="images/stage/stage_30.jpg" alt="Stage"></div>
+    <div class="img-wrap"><img src="images/stage/stage_18.jpg" alt="Stage"></div>
+  </div>
+</section>
+
+<!-- ====== COSTUME DESIGN ====== -->
+<section class="section section-light" id="costume">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-number">04</div>
+      <h2 class="section-title">Costume<br><em>Design</em></h2>
+    </div>
+    <p class="section-desc">Fabric as narrative — garments that carry character, culture, and story.</p>
+  </div>
+
+  <div class="spread reveal">
+    <img class="spread-img" src="images/costume/costume_01.jpg" alt="Costume design">
+    <div class="spread-overlay">
+      <div class="spread-label">Costume Design</div>
+    </div>
+  </div>
+
+  <div class="stack-offset reveal">
+    <div class="img-col">
+      <div class="img-wrap"><img src="images/costume/costume_02.jpg" alt="Costume"></div>
+      <div class="img-wrap"><img src="images/costume/costume_03.jpg" alt="Costume"></div>
+    </div>
+    <div class="img-col">
+      <div class="img-wrap"><img src="images/costume/costume_04.jpg" alt="Costume"></div>
+      <div class="img-wrap"><img src="images/costume/costume_05.jpg" alt="Costume"></div>
+    </div>
+  </div>
+
+  <div class="edit-row reveal">
+    <div class="text-block">
+      <h3>Worn<br><em>Worlds</em></h3>
+      <p>A costume is a portable stage — every seam a decision, every textile a texture of meaning.</p>
+    </div>
+    <div class="img-wrap"><img src="images/costume/costume_06.jpg" alt="Costume"></div>
+  </div>
+
+  <div class="grid-asym grid-asym-reverse reveal">
+    <div class="img-wrap"><img src="images/costume/costume_07.jpg" alt="Costume"></div>
+    <div class="img-wrap"><img src="images/costume/costume_08.jpg" alt="Costume"></div>
+  </div>
+
+  <div class="grid-masonry reveal">
+    <div class="img-wrap"><img src="images/costume/costume_09.jpg" alt="Costume"></div>
+    <div class="img-wrap tall"><img src="images/costume/costume_10.jpg" alt="Costume"></div>
+    <div class="img-wrap"><img src="images/costume/costume_11.jpg" alt="Costume"></div>
+    <div class="img-wrap"><img src="images/costume/costume_12.jpg" alt="Costume"></div>
+  </div>
+
+  <div class="grid-asym reveal">
+    <div class="img-wrap"><img src="images/costume/costume_13.jpg" alt="Costume"></div>
+    <div class="img-wrap"><img src="images/costume/costume_14.jpg" alt="Costume"></div>
+  </div>
+
+  <div class="breakout reveal">
+    <img class="breakout-img" src="images/costume/costume_15.jpg" alt="Costume">
+    <div class="breakout-caption">From sketch to stitch — costume as character architecture.</div>
+  </div>
+
+  <div class="grid-tri reveal">
+    <div class="img-wrap"><img src="images/costume/costume_16.jpg" alt="Costume"></div>
+    <div class="img-wrap"><img src="images/costume/costume_17.jpg" alt="Costume"></div>
+    <div class="img-wrap"><img src="images/costume/costume_18.jpg" alt="Costume"></div>
+  </div>
+</section>
+
+<!-- ====== SHADOW PUPPETRY ====== -->
+<section class="section section-dark" id="shadow">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-number">05</div>
+      <h2 class="section-title">Shadow Puppetry<br><em>&amp; Stop Motion</em></h2>
+    </div>
+    <p class="section-desc">Silhouettes in motion — the ancient art of shadow made cinematic.</p>
+  </div>
+
+  <div class="spread reveal">
+    <img class="spread-img" src="images/shadow/shadow_01.jpg" alt="Shadow puppetry">
+    <div class="spread-overlay">
+      <div class="spread-label">Shadow Puppetry &amp; Stop Motion</div>
+    </div>
+  </div>
+
+  <div class="grid-asym reveal">
+    <div class="img-wrap"><img src="images/shadow/shadow_02.jpg" alt="Shadow"></div>
+    <div class="img-wrap"><img src="images/shadow/shadow_03.jpg" alt="Shadow"></div>
+  </div>
+
+  <div class="edit-row reveal">
+    <div class="img-wrap"><img src="images/shadow/shadow_04.jpg" alt="Shadow"></div>
+    <div class="text-block">
+      <h3>Light<br><em>Unveiled</em></h3>
+      <p>In shadow puppetry, the story lives at the edge of light and dark — a single gesture carries the weight of an entire world.</p>
+    </div>
+  </div>
+
+  <div class="grid-masonry reveal">
+    <div class="img-wrap tall"><img src="images/shadow/shadow_05.jpg" alt="Shadow"></div>
+    <div class="img-wrap"><img src="images/shadow/shadow_06.jpg" alt="Shadow"></div>
+    <div class="img-wrap"><img src="images/shadow/shadow_07.jpg" alt="Shadow"></div>
+    <div class="img-wrap"><img src="images/shadow/shadow_08.jpg" alt="Shadow"></div>
+    <div class="img-wrap tall"><img src="images/shadow/shadow_09.jpg" alt="Shadow"></div>
+  </div>
+
+  <div class="grid-asym grid-asym-reverse reveal">
+    <div class="img-wrap"><img src="images/shadow/shadow_10.jpg" alt="Shadow"></div>
+    <div class="img-wrap"><img src="images/shadow/shadow_11.jpg" alt="Shadow"></div>
+  </div>
+
+  <div class="grid-quad reveal">
+    <div class="img-wrap"><img src="images/shadow/shadow_13.jpg" alt="Shadow"></div>
+    <div class="img-wrap"><img src="images/shadow/shadow_14.jpg" alt="Shadow"></div>
+    <div class="img-wrap"><img src="images/shadow/shadow_15.jpg" alt="Shadow"></div>
+  </div>
+
+  <div class="grid-tri reveal">
+    <div class="img-wrap"><img src="images/shadow/shadow_16.jpg" alt="Shadow"></div>
+    <div class="img-wrap"><img src="images/shadow/shadow_17.jpg" alt="Shadow"></div>
+    <div class="img-wrap"><img src="images/shadow/shadow_18.jpg" alt="Shadow"></div>
+  </div>
+
+  <div class="breakout reveal">
+    <img class="breakout-img" src="images/shadow/shadow_19.jpg" alt="Shadow">
+    <div class="breakout-caption">Between light and shadow, a story unfolds frame by frame.</div>
+  </div>
+
+  <div class="grid-duo reveal">
+    <div class="img-wrap"><img src="images/shadow/shadow_20.jpg" alt="Shadow"></div>
+    <div class="img-wrap"><img src="images/shadow/shadow_21.jpg" alt="Shadow"></div>
+  </div>
+
+  <div class="grid-asym reveal">
+    <div class="img-wrap"><img src="images/shadow/shadow_22.jpg" alt="Shadow"></div>
+    <div class="img-wrap"><img src="images/shadow/shadow_13.jpg" alt="Shadow"></div>
+  </div>
+</section>
+
+<!-- ====== PINATAS ====== -->
+<section class="section section-light" id="pinata">
+  <div class="section-header reveal">
+    <div>
+      <div class="section-number">06</div>
+      <h2 class="section-title">Pinatas<br><em>Toys &amp; Masks</em></h2>
+    </div>
+    <p class="section-desc">Celebration as craft — vibrant sculptures that invite participation and joy.</p>
+  </div>
+
+  <div class="spread reveal">
+    <img class="spread-img" src="images/pinata/pinata_01.jpg" alt="Pinatas">
+    <div class="spread-overlay">
+      <div class="spread-label">Pinatas Toys &amp; Masks</div>
+    </div>
+  </div>
+
+  <div class="grid-asym reveal">
+    <div class="img-wrap"><img src="images/pinata/pinata_02.jpg" alt="Pinata"></div>
+    <div class="img-wrap"><img src="images/pinata/pinata_03.jpg" alt="Pinata"></div>
+  </div>
+
+  <div class="edit-row reveal">
+    <div class="text-block">
+      <h3>Fiesta<br><em>Engineering</em></h3>
+      <p>Each pinata is an architecture of delight — paper and paste built to hold wonder until the moment of release.</p>
+    </div>
+  </div>
+
+  <div class="grid-asym grid-asym-reverse reveal">
+    <div class="img-wrap"><img src="images/pinata/pinata_05.jpg" alt="Pinata"></div>
+    <div class="img-wrap"><img src="images/pinata/pinata_06.jpg" alt="Pinata"></div>
+  </div>
+
+  <div class="breakout reveal">
+    <img class="breakout-img" src="images/pinata/pinata_07.jpg" alt="Pinata">
+    <div class="breakout-caption">Masks reveal what faces conceal — identity sculpted in papier-mache.</div>
+  </div>
+
+  <div class="grid-tri reveal">
+    <div class="img-wrap"><img src="images/pinata/pinata_08.jpg" alt="Pinata"></div>
+    <div class="img-wrap"><img src="images/pinata/pinata_09.jpg" alt="Pinata"></div>
+    <div class="img-wrap"><img src="images/pinata/pinata_10.jpg" alt="Pinata"></div>
+  </div>
+
+  <div class="grid-duo reveal">
+    <div class="img-wrap"><img src="images/pinata/pinata_11.jpg" alt="Pinata"></div>
+    <div class="img-wrap"><img src="images/pinata/pinata_01.jpg" alt="Pinata"></div>
+  </div>
+</section>
+
+<!-- PULLQUOTE -->
+<section class="section section-dark">
+  <div class="pullquote reveal">
+    <p class="pullquote-text">"Art is not what you see,<br>but what you <em>make others see."</em></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <h2 class="footer-name">Rene<br><em>Linares</em></h2>
+      <p class="footer-tagline">Poet, painter, stage designer, puppeteer, and maker of things that delight and disturb in equal measure.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Portfolio</h4>
+      <ul>
+        <li><a href="#poetry">Poetry</a></li>
+        <li><a href="#acrylic">Acrylic Painting</a></li>
+        <li><a href="#stage">Stage Design</a></li>
+        <li><a href="#costume">Costume Design</a></li>
+        <li><a href="#shadow">Shadow Puppetry</a></li>
+        <li><a href="#pinata">Pinatas &amp; Masks</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:rene@linare.studio">rene@linare.studio</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2025 Rene Linares. All rights reserved.</span>
+    <span>Portfolio V2 — Editorial</span>
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightbox-close">&times;</button>
+  
+</div>
+
+<script>
+// ---- Scroll Reveal ----
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+reveals.forEach(el => revealObserver.observe(el));
+
+// ---- Nav hide on scroll down ----
+let lastScroll = 0;
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  const curr = window.pageYOffset;
+  if (curr > lastScroll && curr > 100) {
+    nav.classList.add('hidden');
+  } else {
+    nav.classList.remove('hidden');
+  }
+  lastScroll = curr;
+}, { passive: true });
+
+// ---- Hero parallax ----
+const heroBg = document.querySelector('.hero-bg img');
+window.addEventListener('scroll', () => {
+  const y = window.pageYOffset;
+  if (y < window.innerHeight) {
+    heroBg.style.transform = `scale(1.05) translateY(${y * 0.3}px)`;
+  }
+}, { passive: true });
+
+// ---- Lightbox ----
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxClose = document.getElementById('lightbox-close');
+
+document.querySelectorAll('.img-wrap img, .spread-img, .full-bleed, .breakout-img').forEach(img => {
+  img.style.cursor = 'zoom-in';
+  img.addEventListener('click', () => {
+    lightboxImg.src = img.src;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox || e.target === lightboxClose) {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+});
+
+// ---- Smooth scroll for nav links ----
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
